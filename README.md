@@ -1,4 +1,4 @@
-<p align="center"><img src="/img/yscon_logo.png" width="200"></p>
+<p align="center"><img src="/img/syscon_logo.png" width="200"></p>
 <h1 align="center">[ SYSC0N ]</h1>
 <p align="center">sync all your dotfiles with a git repo</p>
 
