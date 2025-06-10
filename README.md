@@ -4,6 +4,10 @@
 
 <p>We all have this one folder with all our nice and beloved dotfiles. Sometimes you also have more than one PC where you want to use these dotfiles and keep them in sync or just want your dots when you configure a new device. SYSCON is the lightweight python script that do the job.</p>
 
+### Status
+
+alpha (don't use it on productive systems)
+
 ### Prerequisite
 Keep the `config.ini` in the same directory like the SYSC0N tool and enter your credentials:<br>
 
