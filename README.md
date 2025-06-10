@@ -6,10 +6,10 @@
 
 ### Prerequisite
 Keep the `config.ini` in the same directory like the SYSC0N tool and enter your credentials:<br>
+
 `machine = ` Name of the machine<br> 
 `dotfile_repo =`  enter the URL of the remote repository<br>  
 `dotfile_path = ` enter the path to your local dotfile folder<br> 
-
 
 ### Usage
 `syscon.py -init` start a new SYSC0N repo <br>
