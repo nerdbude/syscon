@@ -23,7 +23,7 @@ Keep the `config.ini` in the same directory like the SYSC0N tool and enter your 
 
 #### Linux
 You can use the `install.sh` script in the repo to make the tool executable.
-The script copy SYSC0N to a systemfolder, make it executable and create a symlink to SYSC0N.
+The script copy SYSC0N to a systemfolder, make it executable and create a symlink to SYSC0N. When it's done your can use `syscon` in your terminal.
 
 `sh install.sh`
 

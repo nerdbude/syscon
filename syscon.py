@@ -7,7 +7,7 @@ import sys
 version = "0.1-alpha"
 
 # -----------------------------------------------------
-# Lädt die Konfigurationsdatei 'config.ini' mit configparser
+# Load config.ini 
 # -----------------------------------------------------
 def load_config():
     config = configparser.ConfigParser()
@@ -15,7 +15,7 @@ def load_config():
     return config
 
 # -----------------------------------------------------
-# Klont das Dotfile-Repository aus der config in den Zielpfad
+# clone dotfile-repo from config
 # -----------------------------------------------------
 def git_clone(dotfile_repo, dotfile_path):
 	print(':: SYSC0N (' + version + ')')
@@ -23,8 +23,7 @@ def git_clone(dotfile_repo, dotfile_path):
     subprocess.run(["git", "clone", dotfile_repo, dotfile_path], check=True)
 
 # -----------------------------------------------------
-# Verschiebt den gesamten Inhalt des .config-Verzeichnisses
-# in einen Unterordner '.config/old_dots' zur Sicherung
+# make backup from old dots
 # -----------------------------------------------------
 def move_old_config():
     home_dir = os.path.expanduser("~")
@@ -35,7 +34,7 @@ def move_old_config():
         os.makedirs(old_dots_dir)
 
     for item in os.listdir(config_dir):
-        # Überspringt den Ordner 'old_dots' selbst
+        # ignore 'old_dots'
         if item == "old_dots":
             continue
 
@@ -46,8 +45,7 @@ def move_old_config():
     print(f":: move old dots to {old_dots_dir}")
 
 # -----------------------------------------------------
-# Erstellt symbolische Links von allen Unterordnern im
-# Dotfile-Verzeichnis in das .config-Verzeichnis
+# create symlinks from dots to /.config
 # -----------------------------------------------------
 def create_symlinks(dotfile_path):
     home_dir = os.path.expanduser("~")
@@ -57,16 +55,16 @@ def create_symlinks(dotfile_path):
         subdir_path = os.path.join(dotfile_path, subdir)
         link_path = os.path.join(config_dir, subdir)
 
-        # Nur für Verzeichnisse symbolische Links erstellen
+        # symlinks for folders
         if os.path.isdir(subdir_path):
-            # Falls ein Link oder Ordner schon existiert, löschen
+            # del if exist
             if os.path.exists(link_path) or os.path.islink(link_path):
                 os.remove(link_path)
             os.symlink(subdir_path, link_path)
             print(f":: linking {link_path} -> {subdir_path}")
 
 # -----------------------------------------------------
-# Führt git add, commit und push aus, um Änderungen hochzuladen
+# git add, commit and push
 # -----------------------------------------------------
 def push_changes():
 	print(':: SYSC0N (' + version + ')')
@@ -76,7 +74,7 @@ def push_changes():
     subprocess.run(["git", "push"], check=True)
 
 # -----------------------------------------------------
-# Holt die neuesten Änderungen aus dem Remote-Repository
+# git pull
 # -----------------------------------------------------
 def pull_changes():
 	print(':: SYSC0N (' + version + ')')
@@ -84,10 +82,7 @@ def pull_changes():
     subprocess.run(["git", "pull"], check=True)
 
 # -----------------------------------------------------
-# Fügt einen neuen Konfigurationsordner zu den Dotfiles hinzu:
-# 1. Fragt Benutzer nach Pfad
-# 2. Verschiebt ihn in das Dotfile-Verzeichnis
-# 3. Erstellt einen Symlink im .config-Verzeichnis
+# ask for path to new dotfiles
 # -----------------------------------------------------
 def add_dotfile():
     home_dir = os.path.expanduser("~")
@@ -117,7 +112,7 @@ def add_dotfile():
     print(f":: created symlink: {link_path} -> {destination}")
 
 # -----------------------------------------------------
-# Hauptfunktion zur Steuerung der Befehle
+# commands
 # -----------------------------------------------------
 def main():
     if len(sys.argv) < 2:
@@ -148,7 +143,7 @@ def main():
         sys.exit(1)
 
 # -----------------------------------------------------
-# Einstiegspunkt des Skripts
+# entrypoint 
 # -----------------------------------------------------
 if __name__ == "__main__":
     main()
