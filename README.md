@@ -6,20 +6,20 @@
 
 ### Prerequisite
 Keep the `config.ini` in the same directory like the SYSC0N tool and enter your credentials:<br>
-`machine = ` Name of the machine 
-`dotfile_repo =`  enter the URL of the remote repository  
-`dotfile_path = ` enter the path to your local dotfile folder 
+`machine = ` Name of the machine<br> 
+`dotfile_repo =`  enter the URL of the remote repository<br>  
+`dotfile_path = ` enter the path to your local dotfile folder<br> 
 
 
 ### Usage
-`syscon.py -init` start a new SYSC0N repo 
-`syscon.py -add`  add new dotfiles to SYSC0N repo 
-`syscon.py -push` syncing up (push) to the remote repo 
-`syscon.py -pull` syncing down (pull) from existing SYSC0N repo
+`syscon.py -init` start a new SYSC0N repo <br>
+`syscon.py -add`  add new dotfiles to SYSC0N repo<br> 
+`syscon.py -push` syncing up (push) to the remote repo<br> 
+`syscon.py -pull` syncing down (pull) from existing SYSC0N repo<br>
 
 ### Installation
 #### NixOS
-- soon - 
+- soon
 
 #### Linux
 You can use the `install.sh` script in the repo to make the tool executable.
