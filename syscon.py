@@ -18,7 +18,7 @@ def load_config():
 # clone dotfile-repo from config
 # -----------------------------------------------------
 def git_clone(dotfile_repo, dotfile_path):
-	print(':: SYSC0N (' + version + ')')
+    print(':: SYSC0N (' + version + ')')
     print(f":: cloning repo {dotfile_repo} into {dotfile_path}")
     subprocess.run(["git", "clone", dotfile_repo, dotfile_path], check=True)
 
@@ -41,7 +41,7 @@ def move_old_config():
         source = os.path.join(config_dir, item)
         destination = os.path.join(old_dots_dir, item)
         shutil.move(source, destination)
-	print(':: SYSC0N (' + version + ')')
+    print(':: SYSC0N (' + version + ')')
     print(f":: move old dots to {old_dots_dir}")
 
 # -----------------------------------------------------
@@ -67,7 +67,7 @@ def create_symlinks(dotfile_path):
 # git add, commit and push
 # -----------------------------------------------------
 def push_changes():
-	print(':: SYSC0N (' + version + ')')
+    print(':: SYSC0N (' + version + ')')
     print(':: push dots to git ')
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(["git", "commit", "-m", "Push changes"], check=True)
@@ -77,7 +77,7 @@ def push_changes():
 # git pull
 # -----------------------------------------------------
 def pull_changes():
-	print(':: SYSC0N (' + version + ')')
+    print(':: SYSC0N (' + version + ')')
     print(':: pull dots from git ')
     subprocess.run(["git", "pull"], check=True)
 
@@ -88,7 +88,7 @@ def add_dotfile():
     home_dir = os.path.expanduser("~")
     config_dir = os.path.join(home_dir, ".config")
     dotfile_path = load_config().get('Settings', 'dotfile_path')
-	print(':: SYSC0N (' + version + ')')
+    print(':: SYSC0N (' + version + ')')
     folder_path = input(":: path to dotfile: ").strip()
 
     if not os.path.exists(folder_path):
