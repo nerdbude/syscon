@@ -66,12 +66,37 @@ def create_symlinks(dotfile_path):
 # -----------------------------------------------------
 # git add, commit and push
 # -----------------------------------------------------
+#def push_changes():
+#    print(':: SYSC0N (' + version + ')')
+#    print(':: push dots to git ')
+#    subprocess.run(["git", "add", "."], check=True)
+#    subprocess.run(["git", "commit", "-m", "Push changes"], check=True)
+#    subprocess.run(["git", "push"], check=True)
 def push_changes():
     print(':: SYSC0N (' + version + ')')
     print(':: push dots to git ')
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", "Push changes"], check=True)
-    subprocess.run(["git", "push"], check=True)
+
+    # Wechsel in das Root-Verzeichnis des Repositories
+    repo_dir = os.path.abspath('.')  # Stelle sicher, dass du im richtigen Repo-Verzeichnis bist
+    if not os.path.exists(os.path.join(repo_dir, ".git")):
+        print(f"Fehler: Das Verzeichnis {repo_dir} scheint kein Git-Repository zu sein.")
+        return
+
+    # Überprüfe den git-Status, bevor du mit dem Commit fortfährst
+    result = subprocess.run(["git", "status", "--porcelain"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=repo_dir)
+    if result.returncode != 0:
+        print(f"Fehler bei git status: {result.stderr.decode()}")
+        return
+
+    status_output = result.stdout.decode()
+    if not status_output.strip():
+        print(":: Keine Änderungen zu committen.")
+        return
+
+    # Führe Git-Befehle im richtigen Arbeitsverzeichnis aus
+    subprocess.run(["git", "add", "."], check=True, cwd=repo_dir)
+    subprocess.run(["git", "commit", "-m", "Push changes"], check=True, cwd=repo_dir)
+    subprocess.run(["git", "push"], check=True, cwd=repo_dir)
 
 # -----------------------------------------------------
 # git pull
