@@ -68,7 +68,7 @@ def create_symlinks(dotfile_path):
 # -----------------------------------------------------
 def push_changes():
 	print(':: SYSC0N (' + version + ')')
-    print(":: push dots to git ")
+    print(':: push dots to git ')
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(["git", "commit", "-m", "Push changes"], check=True)
     subprocess.run(["git", "push"], check=True)
@@ -78,7 +78,7 @@ def push_changes():
 # -----------------------------------------------------
 def pull_changes():
 	print(':: SYSC0N (' + version + ')')
-    print(":: pull dots from git ")
+    print(':: pull dots from git ')
     subprocess.run(["git", "pull"], check=True)
 
 # -----------------------------------------------------
@@ -116,7 +116,7 @@ def add_dotfile():
 # -----------------------------------------------------
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python syscon.py [-init | -push | -pull | -add]")
+        print('Usage: python syscon.py [-init | -push | -pull | -add]')
         sys.exit(1)
 
     config = load_config()
@@ -139,7 +139,7 @@ def main():
         add_dotfile()
 
     else:
-        print("Invalid argument. Use -init, -push, -pull, or -add.")
+        print('Invalid argument. Use -init, -push, -pull, or -add.')
         sys.exit(1)
 
 # -----------------------------------------------------
