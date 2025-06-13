@@ -17,10 +17,10 @@ def load_config():
 # -----------------------------------------------------
 # clone dotfile-repo from config
 # -----------------------------------------------------
-def git_clone(dotfile_repo, dotfile_path):
+def git_clone(dotfile_repo, syscon_path):
     print(':: SYSC0N (' + version + ')')
-    print(f":: cloning repo {dotfile_repo} into {dotfile_path}")
-    subprocess.run(["git", "clone", dotfile_repo, dotfile_path], check=True)
+    print(f":: cloning repo {dotfile_repo} into {syscon_path}")
+    subprocess.run(["git", "clone", dotfile_repo, syscon_path], check=True)
 
 # -----------------------------------------------------
 # make backup from old dots
@@ -51,8 +51,8 @@ def create_symlinks(dotfile_path):
     home_dir = os.path.expanduser("~")
     config_dir = os.path.join(home_dir, ".config")
 
-    for subdir in os.listdir(dotfile_path):
-        subdir_path = os.path.join(dotfile_path, subdir)
+    for subdir in os.listdir(syscon_path):
+        subdir_path = os.path.join(syscon_path, subdir)
         link_path = os.path.join(config_dir, subdir)
 
         # symlinks for folders
@@ -70,8 +70,10 @@ def push_changes():
     print(':: SYSC0N (' + version + ')')
     print(':: push dots to git ')
 
-    # root path 
-    repo_dir = os.path.abspath('.')  
+    # root path
+    config = load_config()
+    #repo_dir = os.path.abspath('.')
+    repo_dir = config.get('Settings', 'syscon_path')
     if not os.path.exists(os.path.join(repo_dir, ".git")):
         print(f":: error: {repo_dir} is not a Git-Repository")
         return
@@ -88,8 +90,8 @@ def push_changes():
         return
 
     # push chain
-    #subprocess.run(["git", "add", "."], check=True, cwd=repo_dir)
-    subprocess.run(["git", "commit", "-a", "-m", "Push changes"], check=True, cwd=repo_dir)
+    subprocess.run(["git", "add", "."], check=True, cwd=repo_dir)
+    subprocess.run(["git", "commit", "-m", "Push changes"], check=True, cwd=repo_dir)
     subprocess.run(["git", "push"], check=True, cwd=repo_dir)
 
 # -----------------------------------------------------
@@ -106,7 +108,7 @@ def pull_changes():
 def add_dotfile():
     home_dir = os.path.expanduser("~")
     config_dir = os.path.join(home_dir, ".config")
-    dotfile_path = load_config().get('Settings', 'dotfile_path')
+    dotfile_path = load_config().get('Settings', 'syscon_path')
     print(':: SYSC0N (' + version + ')')
     folder_path = input(":: path to dotfile: ").strip()
 
@@ -115,13 +117,13 @@ def add_dotfile():
         return
 
     folder_name = os.path.basename(folder_path)
-    destination = os.path.join(dotfile_path, folder_name)
+    destination = os.path.join(syscon_path, folder_name)
 
     if os.path.exists(destination):
-        print(f":: folder '{folder_name}' already exists in {dotfile_path} ")
+        print(f":: folder '{folder_name}' already exists in {syscon_path} ")
     else:
         shutil.move(folder_path, destination)
-        print(f":: moved {folder_path} to {dotfile_path}.")
+        print(f":: moved {folder_path} to {syscon_path}.")
 
     link_path = os.path.join(config_dir, folder_name)
 
@@ -144,9 +146,9 @@ def main():
     dotfile_path = config.get('Settings', 'dotfile_path')
 
     if sys.argv[1] == "-init":
-        git_clone(dotfile_repo, dotfile_path)
+        git_clone(dotfile_repo, syscon_path)
         move_old_config()
-        create_symlinks(dotfile_path)
+        create_symlinks(syscon_path)
 
     elif sys.argv[1] == "-push":
         push_changes()
