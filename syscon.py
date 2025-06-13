@@ -73,7 +73,7 @@ def push_changes():
     # root path 
     repo_dir = os.path.abspath('.')  
     if not os.path.exists(os.path.join(repo_dir, ".git")):
-        print(f"Fehler: Das Verzeichnis {repo_dir} scheint kein Git-Repository zu sein.")
+        print(f":: error: {repo_dir} is not a Git-Repository")
         return
 
     # git status 
@@ -121,7 +121,7 @@ def add_dotfile():
         print(f":: folder '{folder_name}' already exists in {dotfile_path} ")
     else:
         shutil.move(folder_path, destination)
-        print(f"Moved {folder_path} to {dotfile_path}.")
+        print(f":: moved {folder_path} to {dotfile_path}.")
 
     link_path = os.path.join(config_dir, folder_name)
 
