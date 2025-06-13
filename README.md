@@ -11,9 +11,10 @@ alpha (don't use it on productive systems)
 ### Prerequisite
 Keep the `config.ini` in the same directory like the SYSCON tool and enter your credentials:<br>
 
-`machine = ` Name of the machine<br> 
-`dotfile_repo =`  enter the URL of the remote repository<br>  
-`dotfile_path = ` enter the path to your local dotfile folder<br> 
+`machine_name = ` Name of the machine<br> 
+`dotfile_repo =`  URL of the remote dotfile repository<br>  
+`dotfile_path = ` path to your local dotfile folder (/home/user/.config/)<br> 
+`syscon_path = ` path to the syscon folder you created (/home/user/syscon/)<br>
 
 ### Usage
 `syscon.py -init` start a new SYSCON repo <br>
