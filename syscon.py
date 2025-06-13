@@ -100,7 +100,31 @@ def push_changes():
 def pull_changes():
     print(':: SYSC0N (' + version + ')')
     print(':: pull dots from git ')
-    subprocess.run(["git", "pull"], check=True)
+
+    # read config.ini
+    config = load_config()
+    dotfile_repo = config.get('Settings', 'dotfile_repo')  # Git-Repo
+    syscon_path = config.get('Settings', 'syscon_path')  # Zielpfad für das Repo
+
+    # check if syscon_path exist
+    if not os.path.exists(syscon_path):
+        print(f":: error: {syscon_path} does not exist")
+        return
+
+    # go to syscon_path
+    if not os.path.exists(os.path.join(syscon_path, ".git")):
+        print(f":: error: {syscon_path} is not a Git repository")
+        return
+
+    # git pull from dotfile_repo
+    try:
+        # check git repo
+        subprocess.run(["git", "pull", dotfile_repo], check=True, cwd=syscon_path)
+        print(f":: Pulled changes from {dotfile_repo} into {syscon_path}")
+    except subprocess.CalledProcessError as e:
+        print(f":: error during git pull: {e}")
+        return
+
 
 # -----------------------------------------------------
 # ask for path to new dotfiles
