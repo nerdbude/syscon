@@ -88,8 +88,8 @@ def push_changes():
         return
 
     # push chain
-    subprocess.run(["git", "add", "."], check=True, cwd=repo_dir)
-    subprocess.run(["git", "commit", "-m", "Push changes"], check=True, cwd=repo_dir)
+    #subprocess.run(["git", "add", "."], check=True, cwd=repo_dir)
+    subprocess.run(["git", "commit", "-a", "-m", "Push changes"], check=True, cwd=repo_dir)
     subprocess.run(["git", "push"], check=True, cwd=repo_dir)
 
 # -----------------------------------------------------
