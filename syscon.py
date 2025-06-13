@@ -51,8 +51,8 @@ def create_symlinks(dotfile_path):
     home_dir = os.path.expanduser("~")
     config_dir = os.path.join(home_dir, ".config")
 
-    for subdir in os.listdir(syscon_path):
-        subdir_path = os.path.join(syscon_path, subdir)
+    for subdir in os.listdir(dotfile_path):
+        subdir_path = os.path.join(dotfile_path, subdir)
         link_path = os.path.join(config_dir, subdir)
 
         # symlinks for folders
@@ -141,13 +141,13 @@ def add_dotfile():
         return
 
     folder_name = os.path.basename(folder_path)
-    destination = os.path.join(syscon_path, folder_name)
+    destination = os.path.join(dotfile_path, folder_name)
 
     if os.path.exists(destination):
-        print(f":: folder '{folder_name}' already exists in {syscon_path} ")
+        print(f":: folder '{folder_name}' already exists in {dotfile_path} ")
     else:
         shutil.move(folder_path, destination)
-        print(f":: moved {folder_path} to {syscon_path}.")
+        print(f":: moved {folder_path} to {dotfile_path}.")
 
     link_path = os.path.join(config_dir, folder_name)
 
