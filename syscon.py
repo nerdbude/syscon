@@ -167,7 +167,7 @@ def main():
     config = load_config()
     machine_name = config.get('Settings', 'machine_name')
     dotfile_repo = config.get('Settings', 'dotfile_repo')
-    syscon_path_path = config.get('Settings', 'syscon_path')
+    syscon_path = config.get('Settings', 'syscon_path')
 
     if sys.argv[1] == "-init":
         git_clone(dotfile_repo, syscon_path)
